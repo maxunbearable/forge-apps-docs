@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Issue Hierarchy for Jira - Privacy Policy</title>
+<style>:root { color-scheme: light dark; --bg:#fff; --fg:#1a1a1a; --muted:#555; --border:#ddd; --code-bg:#f2f2f2; --link:#0052cc; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#1a1a1a; --fg:#e8e8e8; --muted:#aaa; --border:#3a3a3a; --code-bg:#2a2a2a; --link:#6cb2ff; } }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--fg); font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+  h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+  .kicker { color: var(--muted); margin-top: 0; margin-bottom: 2rem; font-size: 0.95rem; }
+  h2 { font-size: 1.3rem; margin-top: 2.2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+  h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+  p, li { color: var(--fg); }
+  a { color: var(--link); }
+  code { background: var(--code-bg); padding: 0.1em 0.35em; border-radius: 4px; font-size: 0.9em; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+  th, td { border: 1px solid var(--border); padding: 0.5rem 0.7rem; text-align: left; }
+  th { background: var(--code-bg); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  footer { margin-top: 3rem; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 1rem; }</style>
+</head>
+<body>
+<h1>Issue Hierarchy for Jira - Privacy Policy</h1>
+<p class="kicker">Privacy Policy</p>
+<p>Draft, ready to host. The Marketplace distribution form requires a <strong>Privacy policy URL</strong> before an app can be shared or listed; this is that page's content.</p>
+<p>Host at <code>https://&lt;domain&gt;/issue-hierarchy/privacy</code> and put the URL in the developer console under <strong>Distribution → Edit → Privacy policy</strong>.</p>
+<hr />
+<h2>What this app is</h2>
+<p>Issue Hierarchy for Jira shows the epic-to-subtask hierarchy of any work item, and across projects from any JQL filter.</p>
+<h2>Where your data lives</h2>
+<p>The app runs entirely on Atlassian's own infrastructure using Atlassian Forge, and it is eligible for the <strong>Runs on Atlassian</strong> programme. It calls <strong>no external service</strong>, and it declares <strong>no remote hostnames</strong>. Nothing this app reads leaves Atlassian's infrastructure, and the vendor has no server that your data passes through.</p>
+<h2>What the app stores</h2>
+<p><strong>Nothing.</strong> The app has no Forge storage, no database and no external service. Every render reads live from Jira and is discarded once the response is sent. Nothing persists between one page load and the next.</p>
+<h2>What the app reads</h2>
+<p>To build a hierarchy tree the app reads work items and their parent relationships, issue types, status and story-point fields. To show who owns each row it reads the display name and avatar of assignees. <strong>The app is read-only: it never creates, changes or deletes anything in Jira.</strong></p>
+<p>All reads run <strong>as the signed-in user</strong> (<code>asUser</code>), so the app can only ever show what that person could already see in Jira themselves.</p>
+<h2>What the app does not store</h2>
+<ul><li><p>No account IDs, email addresses, display names or avatars</p></li><li><p>No work item content of any kind</p></li><li><p>No credentials or tokens</p></li><li><p>No analytics, telemetry or tracking of any kind</p></li></ul>
+<h2>Permissions the app requests</h2>
+<table><tbody><tr><th><p>Scope</p></th><th><p>What it is for</p></th></tr><tr><td><p><code>read:jira-work</code></p></td><td><p>Read work items and their parent relationships, issue types, status and story-point fields to build the tree</p></td></tr><tr><td><p><code>read:jira-user</code></p></td><td><p>Read the display name and avatar of assignees so each row can show who owns the work</p></td></tr></tbody></table>
+<p>The app deliberately does <strong>not</strong> request any write, delete or configuration scope, and does <strong>not</strong> use offline user impersonation.</p>
+<h2>Retention and deletion</h2>
+<p>There is nothing to retain or delete: the app stores no data of its own, in Forge storage or anywhere else.</p>
+<h2>Data residency</h2>
+<p>Because the app stores nothing, there is no data of the vendor's to reside anywhere. Any work item data it displays stays inside your own Atlassian cloud instance, under your own instance's data residency, exactly as it already does today.</p>
+<h2>Contact</h2>
+<p>Questions about this policy, or a request to remove data: <strong>support@maxpetrov.pp.ua</strong></p>
+<p><em>Last updated: 5 October 2026.</em></p>
+</body>
+</html>

@@ -1,4 +1,8 @@
 {
+  "issue-hierarchy": {
+    "documentation": "issue-hierarchy/documentation.html",
+    "privacy": "issue-hierarchy/privacy.html"
+  },
   "issue-tree-templates": {
     "documentation": "issue-tree-templates/documentation.html",
     "privacy": "issue-tree-templates/privacy.html"

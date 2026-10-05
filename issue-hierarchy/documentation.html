@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Issue Hierarchy for Jira - Documentation</title>
+<style>:root { color-scheme: light dark; --bg:#fff; --fg:#1a1a1a; --muted:#555; --border:#ddd; --code-bg:#f2f2f2; --link:#0052cc; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#1a1a1a; --fg:#e8e8e8; --muted:#aaa; --border:#3a3a3a; --code-bg:#2a2a2a; --link:#6cb2ff; } }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--fg); font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+  h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+  .kicker { color: var(--muted); margin-top: 0; margin-bottom: 2rem; font-size: 0.95rem; }
+  h2 { font-size: 1.3rem; margin-top: 2.2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+  h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+  p, li { color: var(--fg); }
+  a { color: var(--link); }
+  code { background: var(--code-bg); padding: 0.1em 0.35em; border-radius: 4px; font-size: 0.9em; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+  th, td { border: 1px solid var(--border); padding: 0.5rem 0.7rem; text-align: left; }
+  th { background: var(--code-bg); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  footer { margin-top: 3rem; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 1rem; }</style>
+</head>
+<body>
+<h1>Issue Hierarchy for Jira - Documentation</h1>
+<p class="kicker">Documentation</p>
+<h2>Overview</h2>
+<p>Jira shows one level of the hierarchy at a time. An epic lists its children, a story lists its subtasks, and nothing shows the shape of the whole thing — let alone work spanning several projects. Multi-level hierarchy is a Premium feature, so teams on Standard either upgrade the entire site or work without it.</p>
+<p>• Reads Jira's real hierarchy and never invents one. Nothing is stored in the app, so the tree stays correct in JQL, boards and reports.
+• A Hierarchy section on every work item: its parent, top-level ancestor, child count, and the first few children by name.
+• The full tree — ancestors above, children and subtasks below, with status, assignee, story points and a progress rollup.
+• Across projects from any JQL filter, which Jira cannot do natively.
+• Children load only when you open a branch, so a 1,000-child epic opens instantly.
+• Team-managed and company-managed projects both work; so does Jira Service Management.
+• Runs on Atlassian — no servers, nothing stored, read-only.</p>
+<h2>Highlights</h2>
+<ul><li><p><strong>See where any work item sits</strong> - A Hierarchy section on every work item shows its parent, its top-level ancestor, how many children it has and the first few by name — without leaving the item or opening anything else.</p></li><li><p><strong>Cross-project hierarchies from any JQL</strong> - Jira has no native cross-project hierarchy view. Enter any JQL filter — a project, a label, a release — and get one tree spanning every project you can see.</p></li><li><p><strong>Numbers that tell you the truth</strong> - Children load only when you open a branch, so a thousand-child epic opens instantly instead of stalling your work item view. The rollup always says what it covers.</p></li></ul>
+<h2>Known limitations</h2>
+<ul><li><p>The app is read-only. It shows hierarchy; it does not create or change links.</p></li><li><p>Levels above epic are not supported in v1 — Jira Standard has no parent above epic, and the app does not invent one in its own storage.</p></li><li><p>Rollups cover loaded descendants unless the panel says "complete".</p></li><li><p>Story points appear only where the field holds a value.</p></li><li><p>Issues the viewer cannot see in Jira are shown as Restricted, never silently hidden.</p></li><li><p>When a licence lapses the app stops showing hierarchies entirely — it does not fall back to a reduced free view.</p></li><li><p>In Jira Service Management the tree is only as deep as the project's issue types allow — JSM ships no epic-level type by default, so a service project is request → sub-task until an admin adds one.</p></li></ul>
+<h2>Getting help</h2>
+<p>Email us and we will reply. Include the work item key, whether the project is team-managed or company-managed, and what the panel showed — a screenshot of the Hierarchy panel is usually enough. If the tree looks wrong, the issue's parent field in Jira is what the app reads, so that is the first thing to check.</p>
+</body>
+</html>
