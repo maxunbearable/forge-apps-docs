@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Delete &amp; Append Actions for Assets in Jira — Documentation</title>
+<style>:root { color-scheme: light dark; --bg:#fff; --fg:#1a1a1a; --muted:#555; --border:#ddd; --code-bg:#f2f2f2; --link:#0052cc; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#1a1a1a; --fg:#e8e8e8; --muted:#aaa; --border:#3a3a3a; --code-bg:#2a2a2a; --link:#6cb2ff; } }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--fg); font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+  h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+  .kicker { color: var(--muted); margin-top: 0; margin-bottom: 2rem; font-size: 0.95rem; }
+  h2 { font-size: 1.3rem; margin-top: 2.2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+  h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+  p, li { color: var(--fg); }
+  a { color: var(--link); }
+  code { background: var(--code-bg); padding: 0.1em 0.35em; border-radius: 4px; font-size: 0.9em; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+  th, td { border: 1px solid var(--border); padding: 0.5rem 0.7rem; text-align: left; }
+  th { background: var(--code-bg); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  footer { margin-top: 3rem; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 1rem; }</style>
+</head>
+<body>
+<h1>Delete &amp; Append Actions for Assets in Jira</h1>
+<p class="kicker">Documentation</p>
+<h2>What this app does</h2>
+<p>Delete &amp; Append Actions for Assets adds three actions to the Jira Automation rule editor's component picker: delete one or more Assets objects, append values to an Assets attribute, and append Assets objects to a work item's Assets field.</p>
+<p>It exists because native Jira Automation can create and edit Assets objects but cannot delete one, and its Edit object action only overwrites or clears an attribute rather than adding to it. These three actions fill exactly that gap, requested in three open Jira Service Management Suggestions with a combined 218 votes.</p>
+<h2>Getting help</h2>
+<p>Email support@maxpetrov.pp.ua. One person reads that mailbox — the one who wrote the app — and every request gets a first reply within two business days, Monday to Friday. That is the window a part-time maintainer can hold every week rather than on a good one; most replies land sooner.</p>
+<p>Say which action ran, the rule and the work item or Assets object involved, and the exact audit-log line it wrote — that line already names the problem and its numbers. If the action stopped with a message naming a required plan, check the site's Jira Service Management tier first.</p>
+<h2>Where to find it after installing</h2>
+<p>There is exactly one place these actions appear, and nothing else in Jira changes.</p>
+<ul><li><p>Open Project settings › Automation, create or edit a rule, and choose Add component → Other apps. The three actions — Delete Assets objects, Append to Assets attribute, Append objects to Assets field — appear in that list.</p></li><li><p>The first time any of the three is added to a rule, the editor asks the admin to Connect; this completes inline, in the same panel, with no separate page.</p></li><li><p>No admin page, no global page, no issue panel and no project settings page of its own. The app only appears inside the rule editor's component picker, and can take up to 20 minutes to appear there right after install.</p></li></ul>
+<h2>Using the actions</h2>
+<p>Each action's form carries one example per field and opens with the line "Requires Jira Service Management Standard, Premium or Enterprise (Assets)." On a site without that plan, running the rule writes a message naming the requirement to the audit log instead of failing with nothing.</p>
+<p>Delete takes a list of keys or ids, or one AQL query with a cap of 50 objects per run; an object already gone counts as deleted, so re-running a rule is safe. Append to attribute adds values to a multi-value or reference attribute without removing what is already there; a single-value attribute can only be set once this way. Append to field adds Assets objects to a work item's Assets field, keeping the ones already on it.</p>
+<p>Every action takes smart values such as {{issue.key}} in its inputs, and every outcome — success, a licence problem, a bad input, or an Assets or Jira error — is written as one named line to the rule's audit log, with the objects or values it touched.</p>
+<h2>What it does with your data</h2>
+<p>The app runs entirely on Atlassian infrastructure and has no backend function, remote host or external permission: every call is made through Forge's own requestJira, as the person who connected the rule. It stores nothing of its own.</p>
+<p>The full privacy policy and the security policy are separate pages; their URLs are on this app's Marketplace listing.</p>
+<h2>Known limitations</h2>
+<p>These are the limits the app was built against, written down here rather than discovered after purchase.</p>
+<ul><li><p>Requires Jira Service Management Standard, Premium or Enterprise. Assets is not included on JSM Free. On Free every action stops immediately with a message naming the plans it needs</p></li><li><p>No egress. Every call goes to the customer's own site through requestJira. No data leaves Atlassian</p></li><li><p>Jira only. Forge custom actions run in Jira automation, not Confluence</p></li><li><p>One-time connection consent. The first time someone adds an action, the editor asks them to Connect, and it completes inline. Rules copied through the REST API do not carry the connection</p></li><li><p>Actions run as the connected user, so that user needs Assets permissions on the target schema</p></li><li><p>Delete is not atomic across many objects. A run that deletes 7 of 10 reports the 7 and the 3. Assets has no bulk-delete operation</p></li><li><p>At most 50 objects or values per run. Larger sets use a branch</p></li><li><p>Attribute types in v1: Default (text, number, date, URL, email and the like) and Object reference. User, Group, Status, Confluence, Version, Project and Attachment attributes are not supported and return an error naming the attribute's type</p></li><li><p>Read–merge–write. Two rules appending to the same attribute in the same second can race, so each append re-reads and retries once</p></li><li><p>No create or edit actions: native Automation's Create object and Edit object actions already cover those</p></li><li><p>Actions appear in the rule picker up to 20 minutes after install</p></li><li><p>Single-value attributes (maximumCardinality: 1) can only be set once via append. A second append to an already-populated single-value attribute is an error naming the native alternative; append never overwrites. A buyer reading the phrase "Append value(s) to an object attribute" should not expect append to replace an existing single value</p></li></ul>
+</body>
+</html>

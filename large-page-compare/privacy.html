@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Large-Page Version Compare for Confluence — Privacy Policy</title>
+<style>:root { color-scheme: light dark; --bg:#fff; --fg:#1a1a1a; --muted:#555; --border:#ddd; --code-bg:#f2f2f2; --link:#0052cc; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#1a1a1a; --fg:#e8e8e8; --muted:#aaa; --border:#3a3a3a; --code-bg:#2a2a2a; --link:#6cb2ff; } }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--fg); font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+  h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+  .kicker { color: var(--muted); margin-top: 0; margin-bottom: 2rem; font-size: 0.95rem; }
+  h2 { font-size: 1.3rem; margin-top: 2.2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+  h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+  p, li { color: var(--fg); }
+  a { color: var(--link); }
+  code { background: var(--code-bg); padding: 0.1em 0.35em; border-radius: 4px; font-size: 0.9em; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+  th, td { border: 1px solid var(--border); padding: 0.5rem 0.7rem; text-align: left; }
+  th { background: var(--code-bg); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  footer { margin-top: 3rem; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 1rem; }</style>
+</head>
+<body>
+<h1>Large-Page Version Compare for Confluence</h1>
+<p class="kicker">Privacy Policy</p>
+<h2>What this app is</h2>
+<p>Large-Page Version Compare for Confluence adds one item, <strong>Compare large versions</strong>, to the ••• menu of a Confluence page. It opens a window in which you pick two versions of that page and see the list of blocks that were added, removed or modified between them. The app is read-only: it changes no page and it sends nothing anywhere. Questions about this policy go to <strong>support@maxpetrov.pp.ua</strong>, read by the person who wrote the app.</p>
+<h2>Where your data lives</h2>
+<p>The app runs entirely on Atlassian's own infrastructure using Atlassian Forge. Its manifest declares <strong>no <code>permissions.external</code> block and no remote hostname</strong>, and it has no backend function at all: the comparison is computed inside the Confluence window in your browser, from two page versions read through Atlassian's own Confluence REST API. Nothing this app reads leaves Atlassian's infrastructure and your browser, and the vendor operates no server your data passes through.</p>
+<h2>What the app stores</h2>
+<p><strong>The app stores no personal data, and in this version it stores nothing at all.</strong> The two page versions are read when you press Compare, held in the open window while it is open, and gone when you close it — never page titles, never page bodies, never account ids are written anywhere. The app declares Forge app storage (<code>storage:app</code>) so that a later version could remember your last pair of versions without asking your administrator to approve a new permission; the current version writes nothing to it.</p>
+<p>The app performs no analytics, telemetry or tracking of any kind.</p>
+<h2>What the app reads, and why</h2>
+<table><tbody><tr><th><p>Scope</p></th><th><p>What it is used for</p></th></tr><tr><td><p><code>read:page:confluence</code></p></td><td><p>Reads the version list and two versions' <code>atlas_doc_format</code> bodies of the page you opened, as you.</p></td></tr><tr><td><p><code>storage:app</code></p></td><td><p>Declared for a later version; the current version writes nothing. Nothing leaves Atlassian.</p></td></tr></tbody></table>
+<p>The app reads <strong>no user directory</strong> and asks for no user scope, so it holds no account id, no display name and no email address of anyone on your site. The version picker shows each version's number, date and version message, not its author.</p>
+<h2>Restricted pages</h2>
+<p>Every read is made as the person using the app, through their own Confluence permissions. The app can show you only versions of a page you can already open, and a read Confluence refuses is shown as that refusal, with its HTTP status, rather than worked around.</p>
+<h2>What the app changes</h2>
+<p>Nothing. The app has no write scope on any Confluence content: it edits no page, restores no version, deletes nothing and adds no macro.</p>
+<h2>Sharing, sub-processors and retention</h2>
+<p>The vendor shares nothing with anybody, because the vendor receives nothing. There are no sub-processors, no third-party services, no advertising and no data sale. Retention is the lifetime of the open window: closing it discards the comparison. Uninstalling the app removes its installation.</p>
+<h2>Your rights</h2>
+<p>Because the app stores no personal data, there is nothing to export, rectify or erase on request. A request under GDPR, UK GDPR or CCPA can be sent to the address below and will be answered with this same statement and with whatever evidence the requester asks for.</p>
+<h2>Security</h2>
+<p>Report a suspected vulnerability to <strong>support@maxpetrov.pp.ua</strong> with the words SECURITY REPORT in the subject. Reports are acknowledged and triaged by the person who wrote the code. A fix ships as a new Forge version; Forge apps on Atlassian cloud are upgraded by Atlassian, so there is no customer-side patch step. The security policy is a separate page linked from the app's Marketplace listing.</p>
+<h2>Contact</h2>
+<p>Max Petrov — <strong>support@maxpetrov.pp.ua</strong>. One address, read by the person who wrote the app.</p>
+</body>
+</html>

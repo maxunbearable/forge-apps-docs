@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Content Reuse Inventory for Confluence — Privacy Policy</title>
+<style>:root { color-scheme: light dark; --bg:#fff; --fg:#1a1a1a; --muted:#555; --border:#ddd; --code-bg:#f2f2f2; --link:#0052cc; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#1a1a1a; --fg:#e8e8e8; --muted:#aaa; --border:#3a3a3a; --code-bg:#2a2a2a; --link:#6cb2ff; } }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--fg); font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+  h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+  .kicker { color: var(--muted); margin-top: 0; margin-bottom: 2rem; font-size: 0.95rem; }
+  h2 { font-size: 1.3rem; margin-top: 2.2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+  h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+  p, li { color: var(--fg); }
+  a { color: var(--link); }
+  code { background: var(--code-bg); padding: 0.1em 0.35em; border-radius: 4px; font-size: 0.9em; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+  th, td { border: 1px solid var(--border); padding: 0.5rem 0.7rem; text-align: left; }
+  th { background: var(--code-bg); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  footer { margin-top: 3rem; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 1rem; }</style>
+</head>
+<body>
+<h1>Content Reuse Inventory for Confluence</h1>
+<p class="kicker">Privacy Policy</p>
+<h2>What this app is</h2>
+<p>Content Reuse Inventory for Confluence adds one page under Apps in the Confluence navigation. A scan reads every page body on the site and builds an inventory of the reusable content sources — native Excerpts, MultiExcerpts and synced blocks — with the pages that include each one, the orphans nobody includes and the includes whose source is gone, counted per space. The app is read-only: it changes no page and it sends nothing anywhere. Questions about this policy go to <strong>support@maxpetrov.pp.ua</strong>, read by the person who wrote the app.</p>
+<h2>Where your data lives</h2>
+<p>The app runs entirely on Atlassian's own infrastructure using Atlassian Forge. Its manifest declares <strong>no <code>permissions.external</code> block and no remote hostname</strong>, and the only code that reaches outside the app calls Atlassian's own Confluence REST API through <code>@forge/api</code>. Nothing this app reads or writes leaves Atlassian's infrastructure, and the vendor operates no server your data passes through.</p>
+<p>The inventory is kept in Forge app storage (<code>storage:app</code>), hosted by Atlassian inside your Atlassian cloud environment and scoped to your installation of this app. That is the only place the app writes.</p>
+<h2>What the app stores</h2>
+<p><strong>The app stores no personal data.</strong> The inventory the page reads is built from page ids, node names and keys, counts and scan metadata — never page titles, never page bodies, never account ids. In full, Forge storage holds:</p>
+<ul><li><p>the id of each page that carries a source or an include, and the id of its space</p></li><li><p>the name or key of each Excerpt, MultiExcerpt and synced block found in a page body</p></li><li><p>the id of the source page and source block that each include points at</p></li><li><p>the space ids and space names used to group the tables and the counts</p></li><li><p>counts: sources, consumers, orphans, dangling includes, pages scanned and pages the app could not read</p></li><li><p>scan metadata: the scan id, when it started and finished, how many batches it has done, and the licence state at the time</p></li></ul>
+<p>Page bodies are read to find those nodes and are discarded batch by batch; no body text is kept. Page titles are shown on the inventory page, but they are read at that moment as the person looking at the page, through their own Confluence permissions, and are not stored. One exception during a scan: a native Excerpt Include names its source page by title inside the macro, and that macro parameter sits in the scan's working records until the scan finishes and resolves it to a page id. The working records are overwritten by the next scan.</p>
+<p>The app performs no analytics, telemetry or tracking of any kind and writes to no sink outside Forge storage.</p>
+<h2>What the app reads, and why</h2>
+<table><tbody><tr><th><p>Scope</p></th><th><p>What it is used for</p></th></tr><tr><td><p><code>read:page:confluence</code></p></td><td><p>Reads page ids and page bodies to find Excerpt, MultiExcerpt and synced-block nodes and the includes that point at them. The same scope reads page titles as the viewer, so a page the viewer cannot open stays hidden.</p></td></tr><tr><td><p><code>read:space:confluence</code></p></td><td><p>Resolves space ids to the space names shown in the Sources table and the per-space counts.</p></td></tr><tr><td><p><code>storage:app</code></p></td><td><p>Forge app storage for the scan's progress and the finished inventory. Nothing leaves Atlassian.</p></td></tr></tbody></table>
+<p>The app reads <strong>no user directory</strong> and asks for no user scope, so it holds no account id, no display name and no email address of anyone on your site.</p>
+<h2>Restricted pages</h2>
+<p>Two rules, both in plain words. A page the app itself cannot read — one restricted from the app — is not scanned: it is counted as unreadable in the scan status and never inventoried. A page the app can read but the person viewing the inventory cannot open is counted, never revealed: that person sees a row reading "restricted page" and a total of how many rows they cannot open, and no title, because titles are read as the viewer, not as the app.</p>
+<h2>What the app changes</h2>
+<p>Nothing. The app has no write scope on any Confluence content: it edits no page, unsyncs no block, deletes nothing and adds no macro. The only writes it performs are to its own Forge storage described above.</p>
+<h2>Sharing, sub-processors and retention</h2>
+<p>The vendor shares nothing with anybody, because the vendor receives nothing. There are no sub-processors, no third-party services, no advertising and no data sale.</p>
+<p>Retention is one inventory at a time. When a scan finishes, the previous scan's metadata and progress markers are deleted and only the inventory rows the new scan still uses are kept; the rows it no longer uses are deleted in the same step. A scan runs weekly on a schedule and whenever an administrator presses Scan now. Uninstalling the app removes its installation and, with it, the Forge storage that installation owned.</p>
+<h2>Your rights</h2>
+<p>Because the app stores no personal data, there is nothing to export, rectify or erase on request. A request under GDPR, UK GDPR or CCPA can be sent to the address below and will be answered with this same statement and with whatever evidence the requester asks for.</p>
+<h2>Security</h2>
+<p>Report a suspected vulnerability to <strong>support@maxpetrov.pp.ua</strong> with the words SECURITY REPORT in the subject. Reports are acknowledged and triaged by the person who wrote the code. A fix ships as a new Forge version; Forge apps on Atlassian cloud are upgraded by Atlassian, so there is no customer-side patch step. The security policy is a separate page linked from the app's Marketplace listing.</p>
+<h2>Contact</h2>
+<p>Max Petrov — <strong>support@maxpetrov.pp.ua</strong>. One address, read by the person who wrote the app.</p>
+</body>
+</html>

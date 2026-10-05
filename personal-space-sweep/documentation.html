@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Personal Space Sweep for Confluence — Documentation</title>
+<style>:root { color-scheme: light dark; --bg:#fff; --fg:#1a1a1a; --muted:#555; --border:#ddd; --code-bg:#f2f2f2; --link:#0052cc; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#1a1a1a; --fg:#e8e8e8; --muted:#aaa; --border:#3a3a3a; --code-bg:#2a2a2a; --link:#6cb2ff; } }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--fg); font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+  h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+  .kicker { color: var(--muted); margin-top: 0; margin-bottom: 2rem; font-size: 0.95rem; }
+  h2 { font-size: 1.3rem; margin-top: 2.2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+  h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+  p, li { color: var(--fg); }
+  a { color: var(--link); }
+  code { background: var(--code-bg); padding: 0.1em 0.35em; border-radius: 4px; font-size: 0.9em; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+  th, td { border: 1px solid var(--border); padding: 0.5rem 0.7rem; text-align: left; }
+  th { background: var(--code-bg); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  footer { margin-top: 3rem; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 1rem; }</style>
+</head>
+<body>
+<h1>Personal Space Sweep for Confluence</h1>
+<p class="kicker">Documentation</p>
+<h2>What this app does</h2>
+<p>Confluence creates a personal space for every new user automatically. On a site that has been running for a while the space list fills with personal spaces nobody ever opened, and Confluence's only native answer is to switch personal spaces off for a whole group — which also takes the feature away from the people who use it.</p>
+<p>Personal Space Sweep adds one page under Confluence administration. It lists every personal space on the site with its key and its current status, counts the pages in each one so the empty ones are marked, and archives or restores them in bulk. Deleting is separate, one space at a time, and permanent.</p>
+<h2>Getting help</h2>
+<p>Email support@maxpetrov.pp.ua. One person reads that mailbox — the one who wrote the app — and every request gets a first reply within two business days, Monday to Friday. That is the window a part-time maintainer can hold every week rather than on a good one; most replies land sooner.</p>
+<p>Say what the administration page showed for the space you were acting on — its key, the status beside it and whether it was marked empty — and what the outcome row said afterwards. If a space did not archive, the outcome row carries what Confluence returned for that space, and that line is the fastest thing to send.</p>
+<h2>Where to find it after installing</h2>
+<p>There is exactly one place this app appears, and nothing else in Confluence changes.</p>
+<ul><li><p>Confluence administration, then Personal Space Sweep in the left-hand nav under Atlassian administration. The URL looks like /wiki/admin/. You need Confluence administrator rights to open it; a user without them is told so rather than shown an empty page.</p></li><li><p>No macro, no space tool, no page byline and no global page. The app adds no content anywhere in the wiki and changes nothing about the spaces it is not asked to act on.</p></li></ul>
+<h2>What the scan counts</h2>
+<p>Pressing Scan for empty spaces reads the page count of each personal space in batches of 50 and marks the spaces holding zero pages. The spaces it marked are the ones pre-selected for you; nothing is selected before a scan.</p>
+<p>Emptiness means zero pages, and pages only. A space holding only blogposts, attachments or comments is reported as not empty, because those are not what the scan counts. The scan reads page metadata; it never reads the body of a page and it stores no page content anywhere.</p>
+<h2>Archiving, restoring and deleting</h2>
+<p>Archive selected spaces archives the spaces you ticked, in batches of 25. Each space gets its own outcome row naming the space and what happened to it, so a space that refused is named rather than lost in a summary line. Show archived personal spaces lists what is already archived, and restore brings a space back from the same page.</p>
+<p>Archiving is reversible and changes no permission: an archived space keeps its content and its grants exactly as they were. Deleting is a different control. It acts on one space at a time, it is behind a confirmation you type by hand, and it cannot be reached from any bulk path in the app. Confluence purges a deleted space rather than moving it to a trash, so nothing — not this app and not Confluence — brings it back.</p>
+<h2>What it does with your data</h2>
+<p>The app runs entirely on Atlassian infrastructure. It declares no remote hostname and opens no network connection of its own, so nothing it reads leaves Atlassian. It stores no space, no page and no person: what the page shows is read from Confluence each time the page opens, and what happened in a session is gone when the tab closes.</p>
+<p>The full privacy policy is a separate page; its URL is on this app's Marketplace listing.</p>
+<h2>Known limitations</h2>
+<p>These are the limits the app was built against, written down here rather than discovered after purchase.</p>
+<ul><li><p>No trash view, and no listing claim of one — Confluence answers this app with 403 when it asks for trashed spaces, so the product cannot show one.</p></li><li><p>A deleted space cannot be recovered by this app or any other — Confluence purges a deleted space instead of sending it to a trash.</p></li><li><p>No owner name, last-login or account-status column — the app reads no user directory and asks for no user scope.</p></li><li><p>Global (type: global) spaces are out of scope entirely — not listed, not actionable — the subject is the personal spaces Confluence creates by itself.</p></li><li><p>No scheduled or automatic sweeps — every action is an admin click — nothing runs on a schedule and nothing acts without a click.</p></li><li><p>The app never changes Global Permissions and never stops a user creating a personal space — Global Permissions stay exactly as the administrator set them.</p></li><li><p>No page-, blogpost- or attachment-level cleanup inside a space — the whole space is the unit of action.</p></li><li><p>Emptiness means zero pages. A space holding only blogposts, attachments or comments is reported as not empty — pages are the only content the scan counts.</p></li><li><p>No export, backup or archive-to-file before archiving or deleting — export a space through Confluence first if a copy is wanted.</p></li><li><p>No notification, email or message to the space owner — the app sends nothing outside Atlassian.</p></li><li><p>Cloud only. No Data Center, no Server — it is a Forge app and runs only on Atlassian infrastructure.</p></li><li><p>One site per install; no cross-site view — install it once per site.</p></li><li><p>The list stops at 10,000 personal spaces — the app reads 40 pages of 250 and goes no further, so a runaway cursor cannot spend a site's budget silently.</p></li></ul>
+</body>
+</html>

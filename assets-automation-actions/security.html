@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Delete &amp; Append Actions for Assets in Jira — Security Policy</title>
+<style>:root { color-scheme: light dark; --bg:#fff; --fg:#1a1a1a; --muted:#555; --border:#ddd; --code-bg:#f2f2f2; --link:#0052cc; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#1a1a1a; --fg:#e8e8e8; --muted:#aaa; --border:#3a3a3a; --code-bg:#2a2a2a; --link:#6cb2ff; } }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--fg); font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+  h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+  .kicker { color: var(--muted); margin-top: 0; margin-bottom: 2rem; font-size: 0.95rem; }
+  h2 { font-size: 1.3rem; margin-top: 2.2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+  h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+  p, li { color: var(--fg); }
+  a { color: var(--link); }
+  code { background: var(--code-bg); padding: 0.1em 0.35em; border-radius: 4px; font-size: 0.9em; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+  th, td { border: 1px solid var(--border); padding: 0.5rem 0.7rem; text-align: left; }
+  th { background: var(--code-bg); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  footer { margin-top: 3rem; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 1rem; }</style>
+</head>
+<body>
+<h1>Delete &amp; Append Actions for Assets in Jira</h1>
+<p class="kicker">Security</p>
+<h2>What this policy covers</h2>
+<p>This is the security policy for Delete &amp; Append Actions for Assets in Jira, a Forge app that adds delete and append actions for Jira Service Management Assets to the Automation rule editor. It covers the first listed version and every later version published under the same app key, ua.pp.maxpetrov.assets-automation-actions.</p>
+<p>The app is written and maintained by one person, Max Petrov. There is no second office, no subcontractor and no sub-processor: the whole of it is the Forge app you install.</p>
+<h2>Where the app runs, and what leaves your site</h2>
+<p>The app runs entirely inside Atlassian Forge, on Atlassian's own infrastructure. Its manifest declares no <code>permissions.external</code> block and no <code>remotes</code> entry: every call is <code>requestJira</code>, which Forge excludes from the egress quota, so no data of yours leaves Atlassian.</p>
+<p>There is no vendor server to breach, no vendor database to leak and no vendor log to subpoena, because none of the three exists. Authentication is Forge's own; the app holds no credential, no API token and no secret of its own, and it asks you for none.</p>
+<h2>What the app stores</h2>
+<p>Nothing, in this version. Forge app storage (<code>storage:app</code>) is declared so a later version could remember a setting without a new permission prompt; no Assets object, no attribute value and no work item content is written anywhere by this version.</p>
+<h2>What the app can reach, and why</h2>
+<p>Seven scopes, each the narrowest one that does the job, including three Assets scopes and one delete scope — deletion is this app's stated purpose, not an incidental grant.</p>
+<ul><li><p><code>read:jira-work</code> - Resolves the work item an append-field action targets and reads field metadata (GET /rest/api/3/field) so a field name can be matched to its id.</p></li><li><p><code>write:jira-work</code> - Writes the merged list of Assets objects back onto a work item's Assets field (PUT /rest/api/3/issue) when the append-field action adds one or more objects.</p></li><li><p><code>read:servicedesk-request</code> - Looks up the site's Assets workspace id (GET /rest/servicedeskapi/assets/workspace) at the start of every run; every action needs it before it can call Assets at all.</p></li><li><p><code>read:cmdb-object:jira</code> - Resolves objects by key or AQL and reads an object's current attributes and its type's attribute definitions (POST /object/aql) before any delete or append.</p></li><li><p><code>write:cmdb-object:jira</code> - Writes the merged value list back onto an Assets attribute (PUT /object/{id}) when the append-attribute action adds one or more values.</p></li><li><p><code>delete:cmdb-object:jira</code> - Deletes the Assets objects the delete action names (DELETE /object/{id}); this is the whole of that action's purpose.</p></li><li><p><code>storage:app</code> - Declared now so a possible future version could remember a setting without asking your site admin for a new permission grant. This version, v1.0.0, stores no data: nothing is written to it.</p></li></ul>
+<h2>How this app is secured</h2>
+<ul><li><p>Report a suspected vulnerability in this app to support@maxpetrov.pp.ua with the words SECURITY REPORT in the subject. Reports are acknowledged and triaged by the person who wrote the code.</p></li><li><p>The app runs entirely inside Atlassian Forge. Its manifest declares no <code>permissions.external</code> block and no <code>remotes</code> entry — every call is <code>requestJira</code>, which Forge excludes from the egress quota — so it has no internet-facing attack surface outside Atlassian.</p></li><li><p>The app collects no Atlassian credential and no API token from anybody. It authenticates through Forge's own connection to the rule, and holds no secret of its own.</p></li><li><p>Every call runs as the person who connected the rule (asUser), never as the app, so the app can only delete, add to or read an Assets object or a work item that person could already reach in Jira.</p></li><li><p>The app can delete and write Assets data and a work item's Assets field: that is its stated purpose, limited to the seven scopes it declares, and every destructive action is named in the rule's audit log with the object keys and counts it touched.</p></li><li><p>A fix for a confirmed vulnerability ships as a new Forge version; Forge apps on Atlassian cloud are upgraded by Atlassian, so there is no customer-side patch step.</p></li></ul>
+<h2>Reporting a vulnerability</h2>
+<p>Email support@maxpetrov.pp.ua with the words SECURITY REPORT in the subject. The report reaches the person who wrote the code; nobody else reads that mailbox.</p>
+<p>One person reads that mailbox — the one who wrote the app — and every request gets a first reply within two business days, Monday to Friday. That is the window a part-time maintainer can hold every week rather than on a good one; most replies land sooner.</p>
+<p>Please include the app version, the Jira site you saw it on and the steps to reproduce. A confirmed vulnerability ships as a new Forge version; Atlassian upgrades Forge apps on Cloud itself, so there is no patch for you to install and no action for your administrators to take.</p>
+<h2>Related documents</h2>
+<p>The privacy policy covers what the app does and does not process, and the documentation page covers how to use it. Both are linked from the app's Marketplace listing.</p>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Issue Tree Templates for Jira - Documentation</title>
+<style>:root { color-scheme: light dark; --bg:#fff; --fg:#1a1a1a; --muted:#555; --border:#ddd; --code-bg:#f2f2f2; --link:#0052cc; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#1a1a1a; --fg:#e8e8e8; --muted:#aaa; --border:#3a3a3a; --code-bg:#2a2a2a; --link:#6cb2ff; } }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--fg); font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+  h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+  .kicker { color: var(--muted); margin-top: 0; margin-bottom: 2rem; font-size: 0.95rem; }
+  h2 { font-size: 1.3rem; margin-top: 2.2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+  h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+  p, li { color: var(--fg); }
+  a { color: var(--link); }
+  code { background: var(--code-bg); padding: 0.1em 0.35em; border-radius: 4px; font-size: 0.9em; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+  th, td { border: 1px solid var(--border); padding: 0.5rem 0.7rem; text-align: left; }
+  th { background: var(--code-bg); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  footer { margin-top: 3rem; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 1rem; }</style>
+</head>
+<body>
+<h1>Issue Tree Templates for Jira</h1>
+<p class="kicker">Documentation</p>
+<h2>Overview</h2>
+<p>Some teams do the same shaped work over and over. A client is onboarded, a release goes out, an incident gets a postmortem, a new starter needs accounts and a buddy. Every time, somebody rebuilds the same epic, the same stories, the same sub-tasks by hand.</p>
+<p>Open any epic, choose Save as issue tree template, and the app captures it: child items, sub-tasks, their field values and the links between them. That is the entire setup. No shadow project, no screens to configure, and capture only ever reads.</p>
+<p>Then create the whole structure in any project in one click, with variables filled in as you go.</p>
+<p>Before anything is created, preflight reads the target project and reports every field as carried over, remapped, skipped or blocked, with the fix. If anything is blocked, nothing is created, so there is never a half-built epic to clean up.</p>
+<p>No epic to start from? One button builds a starter template from your own project's issue types, so it is guaranteed to run.</p>
+<h2>Highlights</h2>
+<ul><li><p><strong>One click from an epic to a template</strong> - Open any epic and choose Save as issue tree template. Child items, sub-tasks, their field values and the links between them are captured exactly as they are, and nothing in Jira is changed.</p></li><li><p><strong>Preflight: know before you create</strong> - The app reads the target project first and reports every field as carried over, remapped, skipped or blocked, with the fix. If anything is blocked, nothing is created at all.</p></li><li><p><strong>One template, every project</strong> - Templates live in the app, not in a shadow project. Draw links between work items, drop field values you do not want, and see how often each template is actually used.</p></li></ul>
+<h2>Known limitations</h2>
+<ul><li><p>No template picker inside Jira's own Create dialog. You start from the app's page, or from the work item you want to template.</p></li><li><p>A captured tree is limited to 200 work items and four levels deep.</p></li><li><p>Attachments are not copied.</p></li><li><p>There is no scheduled or recurring creation.</p></li><li><p>There is no undo. Preflight is designed to make one unnecessary; if a run does fail part-way, the app lists exactly which items were created.</p></li></ul>
+<h2>Getting help</h2>
+<p>Email support@maxpetrov.pp.ua and we will reply. Include the template name, the target project key, and what preflight reported. If a run was blocked, paste the blocked line: it names the field and the fix. If work items were created but look wrong, the issue type names in the template are the first thing to check, because they differ between company-managed and team-managed projects.</p>
+</body>
+</html>

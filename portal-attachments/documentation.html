@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portal Attachments for Jira Service Management — Documentation</title>
+<style>:root { color-scheme: light dark; --bg:#fff; --fg:#1a1a1a; --muted:#555; --border:#ddd; --code-bg:#f2f2f2; --link:#0052cc; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#1a1a1a; --fg:#e8e8e8; --muted:#aaa; --border:#3a3a3a; --code-bg:#2a2a2a; --link:#6cb2ff; } }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--fg); font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+  h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+  .kicker { color: var(--muted); margin-top: 0; margin-bottom: 2rem; font-size: 0.95rem; }
+  h2 { font-size: 1.3rem; margin-top: 2.2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+  h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+  p, li { color: var(--fg); }
+  a { color: var(--link); }
+  code { background: var(--code-bg); padding: 0.1em 0.35em; border-radius: 4px; font-size: 0.9em; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+  th, td { border: 1px solid var(--border); padding: 0.5rem 0.7rem; text-align: left; }
+  th { background: var(--code-bg); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  footer { margin-top: 3rem; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 1rem; }</style>
+</head>
+<body>
+<h1>Portal Attachments for Jira Service Management</h1>
+<p class="kicker">Documentation</p>
+<h2>What this app does</h2>
+<p>Jira Service Management's customer portal shows a customer only the files a public comment carried. A file attached on the Jira create screen, or by an agent working the request, is carried by no comment at all — so the customer looking at their own request cannot see it or download it.</p>
+<p>Portal Attachments adds a Files panel to the portal request that lists those files — filename, size, type, who added it and when — and lets the customer download them. A file carried by an internal comment is never listed and never downloadable.</p>
+<h2>Getting help</h2>
+<p>Email support@maxpetrov.pp.ua. There is one address and it is read by the person who wrote the app.</p>
+<p>Say which request you were looking at, what you expected to see in the Files panel, and what the admin page under Apps shows for the site policy and for that request's project. If a file you expect is missing, two things decide it: whether an internal comment carries that file, which is never listed by design, and whether agent uploads are turned on for that project. Both are readable on the admin page.</p>
+<h2>Where to find it after installing</h2>
+<p>There are exactly two places this app appears, and nothing else in Jira changes.</p>
+<ul><li><p>The customer portal request. Open any request in your service desk portal — the URL looks like /servicedesk/customer/portal/1/HSM-1 — and look down the right-hand column, under Apps. The panel is titled Files. If every file on the request is already shown by a public comment, the panel says so rather than showing nothing.</p></li><li><p>The admin page. Jira administration, then Apps in the left-hand nav, then Portal Attachments. This is where the site policy, the per-project overrides and the live exposure count live. You need Jira administrator rights to open it.</p></li></ul>
+<h2>What the panel lists, and what it never lists</h2>
+<p>The decision is recomputed on every read from Jira's own facts — who attached the file, who reports the request, who participates in it, and whether a public or an internal comment carried it. Nothing per-attachment is stored, so uninstalling the app changes no Jira data.</p>
+<ul><li><p>Always listed: a file on a public comment, exactly as the portal already shows it.</p></li><li><p>Listed by default: a file the reporter or a request participant added, including one added on the Jira create screen, which no comment carries.</p></li><li><p>Listed when an administrator turns it on: a file an agent or any other Jira user added.</p></li><li><p>Never listed, with no setting and no switch: a file carried by an internal comment. The download route re-decides before it fetches a single byte, so asking for such a file directly is refused as well.</p></li></ul>
+<h2>Setting the policy</h2>
+<p>Open Apps, then Portal Attachments, in Jira administration. Two switches decide what the panel adds beyond what the portal already shows: show files the reporter or a request participant added, and show files an agent or any other Jira user added.</p>
+<p>Reporter uploads are on when the app is installed, so a fresh install lists files before anyone opens this page. Agent uploads are off.</p>
+<p>Below the site policy is a table of every service desk project on the site. Saving an override there makes that project ignore the site policy. Clearing it puts the project back on the site policy. Up to 200 projects can carry an override.</p>
+<p>At the top of the page is a live count — how many files on the most recently updated requests are visible in the portal right now, and how many of those would not be visible without this app. It is produced by the same decision the panel runs, so it moves when you change a switch.</p>
+<h2>Known limitations</h2>
+<p>These are limits of the app as shipped, not faults. They are the same list the Marketplace listing carries.</p>
+<ul><li><p>Anonymous portals are not supported. The Forge module this app renders in works for customer and unlicensed accounts and states that it does not support anonymous access, so a portal that allows unauthenticated customers will not show the panel to them.</p></li><li><p>The panel does not upload. Jira Service Management's own comment box owns upload on the portal and this app adds no second one.</p></li><li><p>The app never deletes, renames or re-orders an attachment. It declares no write scope of any kind.</p></li><li><p>Configuration is site-wide with a per-project override. There is no per-request-type and no per-attachment setting.</p></li><li><p>No thumbnails, no inline previews and no bulk or zip download.</p></li><li><p>A file larger than 3 MiB is listed with its size and a message, and is not downloadable in the panel; the ceiling is the Forge front-end response payload limit, which a base64 body of a larger file would exceed.</p></li><li><p>Above 150 attachments on one request the panel lists the newest 150 and states how many are not listed.</p></li><li><p>Nobody is notified when a file becomes visible. Turning a policy switch on does not email a customer, and the panel sends no notification of any kind.</p></li><li><p>Cloud only. There is no Data Center or Server version, and the app does not work in Confluence or in non-JSM Jira projects.</p></li></ul>
+<h2>Privacy and data</h2>
+<p>The app runs entirely on Atlassian infrastructure. It declares no remote hostname and calls no external service; nothing it reads leaves Atlassian. It stores a policy — two switches for the site and two per project with an override — and nothing else. Nothing it stores names an attachment, a request or a person.</p>
+<p>The full privacy policy is published separately and is linked from the Marketplace listing.</p>
+</body>
+</html>

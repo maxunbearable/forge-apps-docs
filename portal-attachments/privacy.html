@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portal Attachments for Jira Service Management — Privacy Policy</title>
+<style>:root { color-scheme: light dark; --bg:#fff; --fg:#1a1a1a; --muted:#555; --border:#ddd; --code-bg:#f2f2f2; --link:#0052cc; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#1a1a1a; --fg:#e8e8e8; --muted:#aaa; --border:#3a3a3a; --code-bg:#2a2a2a; --link:#6cb2ff; } }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--fg); font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+  h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+  .kicker { color: var(--muted); margin-top: 0; margin-bottom: 2rem; font-size: 0.95rem; }
+  h2 { font-size: 1.3rem; margin-top: 2.2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+  h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+  p, li { color: var(--fg); }
+  a { color: var(--link); }
+  code { background: var(--code-bg); padding: 0.1em 0.35em; border-radius: 4px; font-size: 0.9em; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+  th, td { border: 1px solid var(--border); padding: 0.5rem 0.7rem; text-align: left; }
+  th { background: var(--code-bg); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  footer { margin-top: 3rem; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 1rem; }</style>
+</head>
+<body>
+<h1>Portal Attachments for Jira Service Management</h1>
+<p class="kicker">Privacy Policy</p>
+<h2>What this app is</h2>
+<p>Portal Attachments for Jira Service Management adds a <strong>Files</strong> panel to a Jira Service Management customer portal request. Jira Service Management's own portal shows a customer only the files a <strong>public comment</strong> carried; a file attached on the Jira create screen, or by an agent working the request, is carried by no comment and is therefore invisible to the customer looking at their own request. This app lists those files and lets the customer download them, under a visibility policy an administrator sets.</p>
+<h2>Where your data lives</h2>
+<p>The app runs entirely on Atlassian's own infrastructure using Atlassian Forge. Its manifest declares <strong>no <code>permissions.external</code> block and no remote hostname</strong>, and the only module that touches <code>@forge/api</code> calls <code>requestJira</code>, which is Atlassian-internal. Nothing this app reads or writes leaves Atlassian's infrastructure, and the vendor operates no server your data passes through.</p>
+<p>The app's configuration is held in <strong>Forge storage</strong>, hosted by Atlassian inside your Atlassian cloud environment and scoped to your installation of this app.</p>
+<h2>What the app stores</h2>
+<p>The app stores a <strong>policy</strong>, never a decision:</p>
+<ul><li><p>The site-wide policy: two true/false switches — whether reporter uploads are listed, and</p></li></ul>
+<p>whether agent uploads are listed — and the timestamp of the last change.</p>
+<ul><li><p>The same two switches for each project that has an override, plus an index of which</p></li></ul>
+<p>project ids have one.</p>
+<p>That is the whole of it. <strong>Nothing the app stores names an attachment, a request, a project name, a comment or a person.</strong> A project id is an opaque numeric identifier Atlassian assigns; it is configuration, not personal information about anybody.</p>
+<p><strong>The app stores no personal data.</strong> It does not store account IDs, email addresses, display names, avatars, request content, comment text, filenames, file bytes, credentials or tokens. It performs no analytics, telemetry or tracking of any kind, and it writes to no sink outside Forge.</p>
+<h2>What the app reads, and what it does with it</h2>
+<p>Every time the panel renders, the app reads from Jira — as the app, not as the person viewing — and then throws the result away:</p>
+<table><tbody><tr><th><p>Read</p></th><th><p>Why</p></th></tr><tr><td><p>The request's attachment list, reporter and project</p></td><td><p>The panel cannot list a file it cannot read, and the project is what a per-project override is keyed on</p></td></tr><tr><td><p>The request's comments, with each comment's public/internal flag</p></td><td><p>Whether a <strong>public</strong> or an <strong>internal</strong> comment carried a file is the fact the whole visibility decision rests on</p></td></tr><tr><td><p>The request's participants</p></td><td><p>Participants are what widen the default audience beyond the reporter</p></td></tr><tr><td><p>The bytes of one file, when somebody clicks Download</p></td><td><p>No Jira route hands an attachment to a portal customer directly, so the bytes are proxied through the app's own resolver</p></td></tr></tbody></table>
+<p>None of it is persisted. The decision is recomputed from these facts on every read, and the download route recomputes it again before a single byte is fetched.</p>
+<p><strong>A file carried by an internal comment is never listed and never downloadable.</strong> That is not a setting, it has no switch, and asking the download route for such a file directly is refused.</p>
+<h2>Permissions the app requests</h2>
+<table><tbody><tr><th><p>Scope</p></th><th><p>What it is for</p></th></tr><tr><td><p><code>read:jira-work</code></p></td><td><p>Read the request's attachment list, its reporter and its project, and fetch the bytes of a file the policy has already admitted</p></td></tr><tr><td><p><code>read:servicedesk-request</code></p></td><td><p>Read the request's comments — including whether each is public or internal — and its participants</p></td></tr><tr><td><p><code>storage:app</code></p></td><td><p>Store the visibility policy: two switches site-wide, and the same two per project that has an override</p></td></tr></tbody></table>
+<p>The app declares <strong>no write scope of any kind</strong>. It never creates, edits, deletes, renames or re-orders an attachment, a comment, a request or a project.</p>
+<h2>Who can change what is visible</h2>
+<p>The app's configuration page lives under <strong>Apps</strong> in Jira administration and is reachable only by a Jira administrator. It holds the site-wide policy, a per-project override table, and a live count of what the panel is currently exposing across the site, so the effect of a change is readable before and after it is made.</p>
+<h2>Retention and deletion</h2>
+<p>The policy persists until an administrator changes it. There is nothing else to retain: no per-attachment record is ever written, so there is no per-attachment record to delete.</p>
+<p><strong>Uninstalling the app removes all of its stored data</strong>, because Forge storage is scoped to the installation. No Jira data changes meaning when the app is removed — every attachment, comment and request is exactly as Jira left it.</p>
+<h2>Data residency</h2>
+<p>Forge storage follows your Atlassian cloud instance's data residency. The vendor cannot choose or change where it is held.</p>
+<h2>Contact</h2>
+<p>Questions about this policy, a security report, or a request to remove data: <strong>support@maxpetrov.pp.ua</strong></p>
+<p><em>Last updated: 18 September 2026.</em></p>
+</body>
+</html>

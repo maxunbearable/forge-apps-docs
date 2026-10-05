@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Content Reuse Inventory for Confluence — Documentation</title>
+<style>:root { color-scheme: light dark; --bg:#fff; --fg:#1a1a1a; --muted:#555; --border:#ddd; --code-bg:#f2f2f2; --link:#0052cc; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#1a1a1a; --fg:#e8e8e8; --muted:#aaa; --border:#3a3a3a; --code-bg:#2a2a2a; --link:#6cb2ff; } }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--fg); font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+  h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+  .kicker { color: var(--muted); margin-top: 0; margin-bottom: 2rem; font-size: 0.95rem; }
+  h2 { font-size: 1.3rem; margin-top: 2.2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+  h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+  p, li { color: var(--fg); }
+  a { color: var(--link); }
+  code { background: var(--code-bg); padding: 0.1em 0.35em; border-radius: 4px; font-size: 0.9em; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+  th, td { border: 1px solid var(--border); padding: 0.5rem 0.7rem; text-align: left; }
+  th { background: var(--code-bg); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  footer { margin-top: 3rem; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 1rem; }</style>
+</head>
+<body>
+<h1>Content Reuse Inventory for Confluence</h1>
+<p class="kicker">Documentation</p>
+<h2>What this app does</h2>
+<p>Confluence lets a page reuse content from another page: native Excerpt and Excerpt Include, MultiExcerpt, and synced blocks. Nothing native lists them across the site, so nobody can see which pages change with a source, and a deleted source breaks its includes quietly.</p>
+<p>Content Reuse Inventory adds one page under Apps. A scan reads every page body on the site and builds an inventory: every Excerpt, MultiExcerpt and synced block with the pages that include it, the orphans nobody includes, the dangling includes whose source is gone, and counts per space. It is read-only and changes nothing.</p>
+<h2>Getting help</h2>
+<p>Email support@maxpetrov.pp.ua. One person reads that mailbox — the one who wrote the app — and every request gets a first reply within two business days, Monday to Friday. That is the window a part-time maintainer can hold every week rather than on a good one; most replies land sooner.</p>
+<p>Say what the status strip showed — the scan date, the counts and the restricted count — and, for a row that looks wrong, the page it names and the name of the block. If a scan stalled or failed, the line under the button carries the batch it stopped at and the reason Confluence gave, and that line is the fastest thing to send.</p>
+<h2>Where to find it after installing</h2>
+<p>There is exactly one place this app appears, and nothing else in Confluence changes.</p>
+<ul><li><p>Apps in the Confluence top navigation, then Content Reuse Inventory. It is a global page, not an administration page, so it needs no Confluence administrator rights to open.</p></li><li><p>No macro, no space tool, no page byline item and no administration entry. The app adds no content anywhere in the wiki.</p></li><li><p>Before the first scan the page says "No inventory yet" and shows one button, Scan now. There is no setup form.</p></li></ul>
+<h2>Running a scan</h2>
+<p>Scan now reads every page on the site in batches and takes about three minutes per thousand pages; the line under the button shows the batch it is on and how many pages it has read. A scan also runs weekly on a schedule, so the inventory does not depend on anyone remembering to press the button.</p>
+<p>A scan that stops — a batch that never landed, a licence that lapsed — resumes from where it stopped when Scan now is pressed again. The page says so in the line under the button, with the batch number and the reason Confluence gave.</p>
+<p>The inventory is as fresh as the last scan, never live. The status strip carries the scan date.</p>
+<h2>Reading the inventory</h2>
+<p>The Sources table lists each Excerpt, MultiExcerpt and synced block with its page, its space and its name, and the pages that include it. A source nobody includes is an orphan; an include whose source page or block no longer exists is dangling. Both are counted in the status strip and listed by page, grouped by space.</p>
+<p>Page titles are read as you, not as the app, through your own Confluence permissions. A page you cannot open shows as "restricted page" with no title, and the status strip counts how many rows that applies to. A page restricted from the app itself is not scanned at all; it is counted as unreadable in the scan status.</p>
+<h2>What it does with your data</h2>
+<p>The app runs entirely on Atlassian infrastructure. It declares no remote hostname and opens no network connection of its own, so nothing it reads leaves Atlassian. The inventory is kept in Forge storage inside your site: page ids, block names and keys, counts and scan dates — no page bodies, no page titles and no account ids.</p>
+<p>The full privacy policy and the security policy are separate pages; their URLs are on this app's Marketplace listing.</p>
+<h2>Known limitations</h2>
+<p>These are the limits the app was built against, written down here rather than discovered after purchase.</p>
+<ul><li><p>Pages only. Blog posts, whiteboards, databases and attachments are not scanned</p></li><li><p>One site per install; no cross-site consumers, and no Jira consumers of a synced block</p></li><li><p>MultiExcerpt is recognised by the macro keys it ships today (multiexcerpt-macro, multiexcerpt-fast-block-macro, multiexcerpt-fast-include-inline-macro); a MultiExcerpt release that renames its macros is not recognised until this app is updated</p></li><li><p>Restricted pages are counted, not revealed — a viewer sees "N restricted" and no title</p></li><li><p>"pages restricted from the app are not scanned" — a view-restricted page answers asApp() with 404, is counted as "unreadable" in the scan status and never inventoried</p></li><li><p>Viewing a page is not consumption. The inventory is what the body says, not what was rendered</p></li><li><p>No page-body edits, no unsync, no deletion, no "fix" button — read-only</p></li><li><p>No CSV, email, export or webhook</p></li><li><p>The inventory is as fresh as the last scan (weekly schedule or Scan now), never live</p></li><li><p>Third-party excerpt apps other than MultiExcerpt (Narva Multiple Excerpts, f3 asset management) are not recognised</p></li><li><p>Cloud only. No Data Center</p></li><li><p>Archived and trashed pages are not scanned</p></li></ul>
+</body>
+</html>

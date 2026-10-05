@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Business Days JQL for Jira - Documentation</title>
+<style>:root { color-scheme: light dark; --bg:#fff; --fg:#1a1a1a; --muted:#555; --border:#ddd; --code-bg:#f2f2f2; --link:#0052cc; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#1a1a1a; --fg:#e8e8e8; --muted:#aaa; --border:#3a3a3a; --code-bg:#2a2a2a; --link:#6cb2ff; } }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--fg); font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+  h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+  .kicker { color: var(--muted); margin-top: 0; margin-bottom: 2rem; font-size: 0.95rem; }
+  h2 { font-size: 1.3rem; margin-top: 2.2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+  h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+  p, li { color: var(--fg); }
+  a { color: var(--link); }
+  code { background: var(--code-bg); padding: 0.1em 0.35em; border-radius: 4px; font-size: 0.9em; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+  th, td { border: 1px solid var(--border); padding: 0.5rem 0.7rem; text-align: left; }
+  th { background: var(--code-bg); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  footer { margin-top: 3rem; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 1rem; }</style>
+</head>
+<body>
+<h1>Business Days JQL for Jira</h1>
+<p class="kicker">Documentation</p>
+<p>Business Days JQL adds four date functions to Jira's JQL that count in working days instead of calendar days, skipping weekends and the holidays you list.</p>
+<p><strong>Stuck right now?</strong> Two shortcuts before you read any further:</p>
+<ul><li><p><strong>Cannot find the app after installing it?</strong> It has no panel and no button — it lives in</p></li></ul>
+<p>the JQL box and on one page under <strong>Apps</strong>. See *Where to find it after installing*, next.</p>
+<ul><li><p><strong>Need a person?</strong> Email <strong>support@maxpetrov.pp.ua</strong>. What to put in that email is under</p></li></ul>
+<p>*Getting help* at the foot of this page.</p>
+<hr />
+<h2>Where to find it after installing</h2>
+<p><strong>This app has no in-context surface.</strong> It does not add a panel to a work item, a button to a screen, or an item to any menu you are already looking at. If you have just installed it and nothing on your screens looks different, nothing is wrong. There are exactly two places it shows up:</p>
+<p>1. <strong>In the JQL box.</strong> Switch Jira's search from *Basic* to *JQL* and start typing one of the four function names. One character is enough for Jira's own autocomplete to offer it. Nothing has to be enabled per project.</p>
+<p>``<code> duedate &lt;= businessDaysFromNow(10) created &gt;= businessDaysAgo(5) </code>``</p>
+<p>2. <strong>On the app's own page, under Apps.</strong> Open <strong>Apps</strong> in Jira's top navigation and choose <strong>Business Days JQL</strong>. That page is where the working week, the time zone and the holiday list are set, and it is the only screen the app has. Its sections are labelled A · Working week, B · Time zone, C · Holidays, D · Try it, E · Stored answers.</p>
+<p>If neither of those shows anything, the app is not installed on this site, or the site's licence for it is not active — the app's page states which, in words, at the top.</p>
+<h2>The four functions</h2>
+<table><tbody><tr><th><p>Function</p></th><th><p>Returns</p></th></tr><tr><td><p><code>businessDaysAgo(n)</code></p></td><td><p>the date <code>n</code> working days before today</p></td></tr><tr><td><p><code>businessDaysFromNow(n)</code></p></td><td><p>the date <code>n</code> working days after today</p></td></tr><tr><td><p><code>workingDaysAgo(n)</code></p></td><td><p>alias of <code>businessDaysAgo(n)</code></p></td></tr><tr><td><p><code>workingDaysFromNow(n)</code></p></td><td><p>alias of <code>businessDaysFromNow(n)</code></p></td></tr></tbody></table>
+<p>The two pairs are aliases of each other, so whichever name your team reaches for first is the one that works. Each takes a second, optional <code>calendar</code> argument.</p>
+<p><strong>Capitalisation does not matter, and a name Jira does not recognise is refused out loud.</strong> <code>businessDaysAgo(5)</code>, <code>businessdaysago(5)</code> and <code>BUSINESSDAYSAGO(5)</code> are the same query and return the same work items. A name that is genuinely misspelled is a different matter: Jira refuses the whole query before it runs and tells you so, naming the function it could not find. So if a search ran and simply came back with fewer rows than you expected, the function name is not what went wrong — it was accepted.</p>
+<p>Each function returns a <strong>date</strong>, so it goes on the right-hand side of a comparison against any date field — <code>duedate</code>, <code>created</code>, <code>updated</code>, <code>resolutiondate</code>, or a custom date field — and all six comparison operators work: <code>=</code>, <code>!=</code>, <code>&gt;</code>, <code>&gt;=</code>, <code>&lt;</code>, <code>&lt;=</code>.</p>
+<p>They work in ad-hoc search and in <strong>saved filters</strong>, which means they also work anywhere a saved filter is used: boards, dashboards gadgets, and subscriptions.</p>
+<h3>Examples</h3>
+<p>``<code> duedate &lt;= businessDaysFromNow(10) ORDER BY duedate ASC created &gt;= businessDaysAgo(5) AND statusCategory != Done updated &lt; workingDaysAgo(3) AND assignee = currentUser() project = OPS AND duedate = businessDaysFromNow(1) </code>``</p>
+<h2>Setting the calendar</h2>
+<p>Everything is on the app's page under <strong>Apps → Business Days JQL</strong>.</p>
+<p><strong>A · Working week.</strong> Tick the days that count as working days. The default is Monday to Friday. A Sunday-to-Thursday week is set by ticking those five and clearing the other two.</p>
+<p><strong>B · Time zone.</strong> Which day counts as "today". Jira reads the dates these functions produce in your site's time zone, so a site that is not on UTC needs this set or every answer is a day out for part of each day. Enter an IANA name such as <code>Europe/Kiev</code>, or a fixed offset such as <code>+03:00</code>. If the runtime cannot resolve a named zone the page says so and asks for a fixed offset instead.</p>
+<p><strong>C · Holidays.</strong> One date per line, as <code>YYYY-MM-DD</code>, up to 2000 dates. A holiday that falls on a working day pushes every answer one working day further out. Lines that are not valid dates are <strong>not silently dropped</strong>: the page lists each rejected line back to you with the line number and the reason.</p>
+<p><strong>D · Try it.</strong> The page computes each function against the calendar you have saved and shows the date it currently resolves to, so you can check the configuration without running a search.</p>
+<p>Press <strong>Save calendar</strong> and the app immediately recomputes the answers it has stored, so a search run straight afterwards reflects the new calendar.</p>
+<h2>One calendar for the whole site</h2>
+<p>One working week, one time zone and one holiday list cover the whole site. Teams in different countries share one answer, so a site spanning two countries gets one team's day boundary wrong. This is the app's main limitation. There is no per-project and no per-team calendar, and the time zone in section B is what decides where each team's day starts.</p>
+<h2>Stored answers, and why they refresh</h2>
+<p>A date function's answer moves as the calendar moves: <code>businessDaysAgo(5)</code> means a different date tomorrow than it does today. The app therefore keeps its answers up to date on its own, without anybody opening the page.</p>
+<p>Section <strong>E · Stored answers</strong> shows what it holds: the function, the clause it was used in, the date currently stored, the date freshly computed, and a <code>current</code> or <code>stale</code> lozenge for whether they agree. <strong>Refresh now</strong> runs the same work immediately.</p>
+<p>A single refresh run stops at a fixed limit rather than running unbounded. Each run resumes where the previous one stopped and wraps round at the end, so every stored answer is reached in turn. When a run does not reach everything, the page says how many rows it did not reach.</p>
+<p>Some answers cannot be refreshed at all — most often a date function used against a field that is not a date, which Jira refuses to store a value for. Those are listed as <code>unrefreshable</code> and are skipped from then on rather than retried on every run.</p>
+<h2>When a query returns nothing you expected</h2>
+<p>A bad argument returns no results rather than wrong ones, and in Jira's issue search the app names the fault in its own error banner. The REST search API receives the empty result without that message, and an automation rule or filter subscription may do the same, so the app's page under Apps states the rule too.</p>
+<p>Which of the two you get depends on where the query runs. The issue search box and the REST search API were both driven against a live site; the other callers below are named as unmeasured:</p>
+<ul><li><p><strong>In the issue search box</strong>, a bad argument produces a red <strong>JQL error</strong> carrying the</p></li></ul>
+<p>app's own sentence. <code>businessDaysAgo("abc")</code> and a missing argument both give *"Business Days JQL needs a whole number of days, not "abc". Put the number inside the brackets, e.g. businessDaysAgo(5)."* — the text you typed is echoed back to you. <code>businessDaysAgo(99999)</code> gives *"Business Days JQL accepts 0 to 3650 days; 99999 is beyond that."*</p>
+<ul><li><p><strong>Through the REST search API</strong>, the same queries come back as an ordinary empty result</p></li></ul>
+<p>set with no message at all: Jira does not pass the app's sentence on to that caller. Other callers, such as a filter subscription or an automation rule, have not been measured and may do the same, which is why the rule is repeated here and on the app's own page under Apps.</p>
+<p>Returning nothing is deliberate — it is better to show nothing than to show a wrong list — but on the silent path the query itself cannot tell you what went wrong.</p>
+<p>Check, in this order:</p>
+<p>1. <strong>The argument.</strong> It must be a non-negative whole number. 2. <strong>The field.</strong> The function returns a date, so the left-hand side must be a date field. 3. <strong>The working week</strong>, on the app's page, section A. A calendar with no working days ticked has no answer to give, and the page says so under D · Try it. 4. <strong>The time zone</strong>, section B. A site that is not on UTC with the zone left at UTC is a day out for part of each day. 5. <strong>The licence.</strong> If the site's licence for the app is not active, the page says so at the top and searches return nothing.</p>
+<h2>Time Tracking</h2>
+<p>The app does not read or sync Jira's own Time Tracking working-days setting. Set the working week on the app's page instead. The two settings are independent and Jira does not expose the Time Tracking one to a Forge app.</p>
+<h2>What the app does not do</h2>
+<ul><li><p>No per-project or per-team calendar, and no per-user calendar.</p></li><li><p>No business-hours or part-day arithmetic — the unit is a whole working day.</p></li><li><p>No holiday-calendar import and no per-country preset; holidays are typed in.</p></li><li><p>No panel, glance or button on a work item. The config page is the only screen.</p></li><li><p>No SLA or breach reporting, and no reading of Jira's own Time Tracking configuration.</p></li></ul>
+<h2>Privacy and data</h2>
+<p>The app runs entirely on Atlassian infrastructure, calls no external service, declares no remote hostnames, and stores no personal data. It reads <strong>only its own data</strong>: its Jira scopes are <code>read:app-data:jira</code> and <code>write:app-data:jira</code>, which do not grant access to work items, projects or users. Full detail is in the privacy policy linked from the Marketplace listing.</p>
+<h2>Getting help</h2>
+<p>Email support@maxpetrov.pp.ua. Include the exact JQL you ran, which of the four functions it used, and what the app's own page under Apps shows in sections A, B and C. If a query returned nothing you did not expect, the argument is the first thing to check: a bad argument returns no results rather than wrong ones, and in Jira's issue search the app names the fault in its own error banner. The REST search API receives the empty result without that message, and an automation rule or filter subscription may do the same, so the app's page under Apps states the rule too.</p>
+<p><em>Last updated: 13 September 2026.</em></p>
+</body>
+</html>

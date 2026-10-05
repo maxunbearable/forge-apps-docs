@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Personal Space Sweep for Confluence — Privacy Policy</title>
+<style>:root { color-scheme: light dark; --bg:#fff; --fg:#1a1a1a; --muted:#555; --border:#ddd; --code-bg:#f2f2f2; --link:#0052cc; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#1a1a1a; --fg:#e8e8e8; --muted:#aaa; --border:#3a3a3a; --code-bg:#2a2a2a; --link:#6cb2ff; } }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--fg); font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+  h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+  .kicker { color: var(--muted); margin-top: 0; margin-bottom: 2rem; font-size: 0.95rem; }
+  h2 { font-size: 1.3rem; margin-top: 2.2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+  h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+  p, li { color: var(--fg); }
+  a { color: var(--link); }
+  code { background: var(--code-bg); padding: 0.1em 0.35em; border-radius: 4px; font-size: 0.9em; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+  th, td { border: 1px solid var(--border); padding: 0.5rem 0.7rem; text-align: left; }
+  th { background: var(--code-bg); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  footer { margin-top: 3rem; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 1rem; }</style>
+</head>
+<body>
+<h1>Personal Space Sweep for Confluence</h1>
+<p class="kicker">Privacy Policy</p>
+<h2>What this app is</h2>
+<p>Personal Space Sweep for Confluence adds one page under Confluence administration. It lists every personal space on the site with its key and its current status, counts the pages in each one so the empty ones are marked, and archives or restores those spaces in bulk. Deleting a space is a separate control: one space at a time, behind a confirmation typed by hand, and permanent.</p>
+<h2>Where your data lives</h2>
+<p>The app runs entirely on Atlassian's own infrastructure using Atlassian Forge. Its manifest declares <strong>no <code>permissions.external</code> block and no remote hostname</strong>, and the only code that reaches outside the app calls Atlassian's own Confluence REST API through <code>@forge/api</code>. Nothing this app reads or writes leaves Atlassian's infrastructure, and the vendor operates no server your data passes through.</p>
+<p>The app declares <code>storage:app</code> — Forge app storage, hosted by Atlassian inside your Atlassian cloud environment and scoped to your installation of this app.</p>
+<h2>What the app stores</h2>
+<p><strong>The app stores no personal data.</strong> It does not store account IDs, email addresses, display names, avatars, space names, page titles, page bodies, credentials or tokens. It performs no analytics, telemetry or tracking of any kind, and it writes to no sink outside Forge.</p>
+<p>What the administration page shows is read from Confluence <strong>each time the page opens</strong>, and what happened during a session — which spaces were scanned, which were archived, what each outcome row said — is held in the browser tab only and is gone when the tab is closed. The app keeps no record of an action it performed.</p>
+<p><code>storage:app</code> is declared in version 1.0.0 and is presently unused by the shipped code. It is declared now rather than later because adding a scope to a listed Forge app pushes every existing customer through a site-administrator consent step, which is a worse outcome for a customer than an unused declaration.</p>
+<h2>What the app reads, and why</h2>
+<table><tbody><tr><th><p>Scope</p></th><th><p>What it is used for</p></th></tr><tr><td><p><code>read:space:confluence</code></p></td><td><p>Lists the spaces on the site, so the page can show which of them are personal spaces and with what keys.</p></td></tr><tr><td><p><code>read:space-details:confluence</code></p></td><td><p>Reads each space's type and status — what separates a personal space from a global one, and a current space from an archived one.</p></td></tr><tr><td><p><code>read:content.metadata:confluence</code></p></td><td><p>Reads page metadata for the emptiness count. The app counts pages; it never reads the body of a page.</p></td></tr><tr><td><p><code>read:page:confluence</code></p></td><td><p>Lists the pages in a space so the scan can report zero or not zero.</p></td></tr><tr><td><p><code>write:space:confluence</code></p></td><td><p>Archives a space and restores it. An archived space keeps its content and its permissions.</p></td></tr><tr><td><p><code>write:space.permission:confluence</code></p></td><td><p>Required by Confluence alongside the space write when a space changes status. The app never edits, adds or removes a permission grant.</p></td></tr><tr><td><p><code>delete:space:confluence</code></p></td><td><p>Deletes one space, and only after an administrator types that space's key into a confirmation field.</p></td></tr><tr><td><p><code>storage:app</code></p></td><td><p>Forge app storage, declared in version 1.0.0. See above.</p></td></tr></tbody></table>
+<p>The app reads <strong>no user directory</strong>. It asks for no user scope, so it cannot show an owner name, a last-login date or an account status, and it does not have them to store.</p>
+<h2>What the app changes</h2>
+<p>Only three things, and only when an administrator clicks: a space's status changes to archived, an archived space's status changes back to current, or a single space is deleted.</p>
+<p><strong>Archiving is reversible and changes no permission.</strong> <strong>Deleting is not reversible</strong> — Confluence purges a deleted space rather than moving it to a trash, so neither this app nor Confluence nor Atlassian support can bring it back. That is a property of Confluence, not a limitation of this app.</p>
+<p>The app never changes Global Permissions and never stops a user from creating a personal space.</p>
+<h2>Sharing, sub-processors and retention</h2>
+<p>The vendor shares nothing with anybody, because the vendor receives nothing. There are no sub-processors, no third-party services, no advertising and no data sale. There is nothing to retain: uninstalling the app removes its Forge installation, and because the app holds no record of your spaces there is no copy of anything left behind.</p>
+<h2>Your rights</h2>
+<p>Because the app stores no personal data, there is nothing to export, rectify or erase on request. A request under GDPR, UK GDPR or CCPA can be sent to the address below and will be answered with this same statement and with whatever evidence the requester asks for.</p>
+<h2>Security</h2>
+<p>Report a suspected vulnerability to <strong>support@maxpetrov.pp.ua</strong> with the words SECURITY REPORT in the subject. Reports are acknowledged and triaged by the person who wrote the code. A fix ships as a new Forge version; Forge apps on Atlassian cloud are upgraded by Atlassian, so there is no customer-side patch step.</p>
+<h2>Contact</h2>
+<p>Max Petrov — <strong>support@maxpetrov.pp.ua</strong>. One address, read by the person who wrote the app.</p>
+</body>
+</html>

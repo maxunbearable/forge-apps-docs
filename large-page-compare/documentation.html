@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Large-Page Version Compare for Confluence — Documentation</title>
+<style>:root { color-scheme: light dark; --bg:#fff; --fg:#1a1a1a; --muted:#555; --border:#ddd; --code-bg:#f2f2f2; --link:#0052cc; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#1a1a1a; --fg:#e8e8e8; --muted:#aaa; --border:#3a3a3a; --code-bg:#2a2a2a; --link:#6cb2ff; } }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--fg); font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+  h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+  .kicker { color: var(--muted); margin-top: 0; margin-bottom: 2rem; font-size: 0.95rem; }
+  h2 { font-size: 1.3rem; margin-top: 2.2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+  h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+  p, li { color: var(--fg); }
+  a { color: var(--link); }
+  code { background: var(--code-bg); padding: 0.1em 0.35em; border-radius: 4px; font-size: 0.9em; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+  th, td { border: 1px solid var(--border); padding: 0.5rem 0.7rem; text-align: left; }
+  th { background: var(--code-bg); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  footer { margin-top: 3rem; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 1rem; }</style>
+</head>
+<body>
+<h1>Large-Page Version Compare for Confluence</h1>
+<p class="kicker">Documentation</p>
+<h2>What this app does</h2>
+<p>Large-Page Version Compare adds one item, Compare large versions, to the ••• menu of a Confluence page. Pick two versions of the page and it lists every block that was added, removed or modified between them, on pages of any size up to 25 MB per version.</p>
+<p>It exists because Confluence's own compare stops being reliable on large pages. Measured on a Confluence Cloud site on 2026-09-29: on a 217 KB page native compare reported 114 edits where 142 blocks had been edited; on a 543 KB page it collapsed to a whole-page delete and re-insert; on a 4.88 MB page the browser tab froze and crashed. It is read-only and changes nothing.</p>
+<h2>Getting help</h2>
+<p>Email support@maxpetrov.pp.ua. One person reads that mailbox — the one who wrote the app — and every request gets a first reply within two business days, Monday to Friday. That is the window a part-time maintainer can hold every week rather than on a good one; most replies land sooner.</p>
+<p>Say which two versions you compared and what the summary line showed — the change count and both block counts — and, for a change that looks wrong, its number from the Change k of C counter. If a read failed, the message names the version and the HTTP status Confluence gave, and that line is the fastest thing to send.</p>
+<h2>Where to find it after installing</h2>
+<p>There is exactly one place this app appears, and nothing else in Confluence changes.</p>
+<ul><li><p>Open any Confluence page or live doc, then its ••• (More actions) menu, then Compare large versions. A window opens over the page.</p></li><li><p>No page under Apps, no macro, no space tool, no page byline item and no administration entry. There is no setup form.</p></li><li><p>The window opens with the previous version as From and the current version as To, and one Compare button. On a page with only one version it says so and shows no Compare button.</p></li></ul>
+<h2>Comparing two versions</h2>
+<p>The version pickers list the newest 250 versions by number, date and version message; Load older versions fetches the rest. Press Compare and the app reads both versions as you, through your own Confluence permissions, and compares them in the window.</p>
+<p>A version you cannot read, or a read Confluence refuses, is shown with the version number and the HTTP status Confluence gave; Try again re-reads only that version. A version above 25 MB of page data is named with its size and nothing is compared.</p>
+<h2>Reading the result</h2>
+<p>The summary strip gives the changes by kind — added, removed, modified — and the block count of each version. Next and Previous step through the changes with a Change k of C counter, Go to change jumps to a number, and the heading outline of the To version selects the first change at or after the heading you pick.</p>
+<p>The selected change is rendered as Confluence content. Inside a modified block, removed words are struck and inserted words underlined. A changed table, list, panel, expand or layout is compared one level down, so the detail names the row or item — row 17 of 240 — and renders only what changed. Two versions that differ only in formatting noise show 0 changes with both block counts.</p>
+<h2>What it does with your data</h2>
+<p>The app runs entirely on Atlassian infrastructure and has no backend: both versions are read into the open window and compared there, and closing the window discards them. It stores nothing, declares no remote hostname and opens no network connection of its own, so nothing it reads leaves Atlassian.</p>
+<p>The full privacy policy and the security policy are separate pages; their URLs are on this app's Marketplace listing.</p>
+<h2>Known limitations</h2>
+<p>These are the limits the app was built against, written down here rather than discovered after purchase.</p>
+<ul><li><p>Third-party and Forge macros are compared by their stored parameters and body, not rendered; the detail shows "Macro: &lt;extensionKey&gt;" in their place</p></li><li><p>Images and attachments: a changed image reference (media id, width, alt) is a change; the file's pixels are never compared</p></li><li><p>A moved block is reported as one removal and one addition, not as a move</p></li><li><p>Word-level highlight stops at 50,000 words in one changed block (for a table or list, counted over its changed rows or items only); a longer one shows before and after whole, with its word count</p></li><li><p>Pages and live docs only. Blog posts, whiteboards and databases are not compared; the ••• item on a blog post opens the unsupported state</p></li><li><p>Two versions of one page. No cross-page compare (Compare Any Two Pages ships it)</p></li><li><p>Published versions only; unpublished drafts are not listed</p></li><li><p>Formatting-only noise that Confluence itself adds (internal ids, auto-size flags, empty attribute sets, a macro's server-added parent id) is ignored by design; inline-comment markers are ignored too</p></li><li><p>Up to 25 MB of page data per version (2.5× the largest measured, 10.07 MB); above it the app says so and compares nothing</p></li><li><p>No export, email, comment or saved report; read-only, and the result lives in the open modal only</p></li><li><p>The version picker shows number, date and version message, not the author's name</p></li><li><p>Cloud only</p></li></ul>
+</body>
+</html>

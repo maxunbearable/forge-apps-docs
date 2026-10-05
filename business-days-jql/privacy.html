@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Business Days JQL for Jira - Privacy Policy</title>
+<style>:root { color-scheme: light dark; --bg:#fff; --fg:#1a1a1a; --muted:#555; --border:#ddd; --code-bg:#f2f2f2; --link:#0052cc; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#1a1a1a; --fg:#e8e8e8; --muted:#aaa; --border:#3a3a3a; --code-bg:#2a2a2a; --link:#6cb2ff; } }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--fg); font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+  h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+  .kicker { color: var(--muted); margin-top: 0; margin-bottom: 2rem; font-size: 0.95rem; }
+  h2 { font-size: 1.3rem; margin-top: 2.2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+  h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+  p, li { color: var(--fg); }
+  a { color: var(--link); }
+  code { background: var(--code-bg); padding: 0.1em 0.35em; border-radius: 4px; font-size: 0.9em; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+  th, td { border: 1px solid var(--border); padding: 0.5rem 0.7rem; text-align: left; }
+  th { background: var(--code-bg); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  footer { margin-top: 3rem; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 1rem; }</style>
+</head>
+<body>
+<h1>Business Days JQL for Jira</h1>
+<p class="kicker">Privacy Policy</p>
+<p>Source of the published privacy page. The Marketplace distribution form requires a <strong>Privacy policy URL</strong> before an app can be shared or listed, and a URL that asks a reviewer to sign in counts as no privacy policy at all. The published copy of this page and its anonymous-load proof are recorded in <code>docs/APP3-LISTING.md</code>.</p>
+<hr />
+<h2>What this app is</h2>
+<p>Business Days JQL for Jira adds four date functions to Jira's own JQL — <code>businessDaysAgo</code>, <code>businessDaysFromNow</code>, <code>workingDaysAgo</code> and <code>workingDaysFromNow</code> — which count in working days rather than calendar days, using one working week, one time zone and one holiday list that an administrator sets for the whole site.</p>
+<h2>Where your data lives</h2>
+<p>The app runs entirely on Atlassian's own infrastructure using Atlassian Forge. It calls <strong>no external service</strong> and it declares <strong>no remote hostnames</strong> in its manifest. Nothing this app reads or writes leaves Atlassian's infrastructure, and the vendor has no server that your data passes through.</p>
+<p>The calendar is stored in <strong>Forge storage</strong>, hosted by Atlassian inside your Atlassian cloud environment and scoped to your installation of this app.</p>
+<h2>What the app stores</h2>
+<ul><li><p>The working week: which of the seven weekdays count as working days.</p></li><li><p>The time zone, as an IANA name (for example <code>Europe/Kiev</code>) or a fixed offset.</p></li><li><p>The holiday list: dates, one per line, as <code>YYYY-MM-DD</code>, up to 2000 of them.</p></li><li><p>A run record for the refresh: when it last ran, how many stored answers it checked,</p></li></ul>
+<p>how many it changed, how many it did not reach, and the text of the last error if there was one.</p>
+<ul><li><p>The date each of the four functions currently resolves to, for each argument and</p></li></ul>
+<p>operator combination a search has used. This is how a Forge JQL function returns a value to Jira's search at all.</p>
+<p><strong>The app stores no personal data.</strong> It does not store account IDs, email addresses, display names, avatars, work item content, project names, comments, attachments, work logs, credentials or tokens. It performs no analytics, telemetry or tracking of any kind.</p>
+<p>A holiday date and a working-week choice are administrative configuration, not personal information about anybody.</p>
+<h2>What the app reads</h2>
+<p>The app reads <strong>only its own data</strong>. Its two Jira scopes are <code>read:app-data:jira</code> and <code>write:app-data:jira</code>, which grant access to the app's own stored answers and to nothing else — not work items, not projects, not users, not project configuration. The app requests no <code>read:jira-work</code>, no <code>write:jira-work</code> and no <code>manage:jira-configuration</code> scope, and uses no offline user impersonation.</p>
+<p>When somebody runs a search, Jira asks the app for the date a function resolves to and then applies that date to the search itself. The app is never told which work items matched, and never sees the results.</p>
+<h2>Permissions the app requests</h2>
+<table><tbody><tr><th><p>Scope</p></th><th><p>What it is for</p></th></tr><tr><td><p><code>storage:app</code></p></td><td><p>Store the site's working week, time zone and holiday list, plus the refresh run record, in Forge storage inside Atlassian</p></td></tr><tr><td><p><code>read:app-data:jira</code></p></td><td><p>Read back the stored answers this app itself registered for its four JQL functions, so the config page can show which are current and which are stale</p></td></tr><tr><td><p><code>write:app-data:jira</code></p></td><td><p>Write the date each function currently resolves to, and rewrite it when the calendar or the day changes</p></td></tr></tbody></table>
+<h2>Who can change the calendar</h2>
+<p>The app's page lives under <strong>Apps</strong> and is a global page: the working week, time zone and holiday list apply to the whole site. Changing them changes the answer every search gets.</p>
+<h2>Retention and deletion</h2>
+<p>The calendar persists until somebody changes it in the app. Stored answers are rewritten as the calendar and the date move, and are removed by Atlassian when they are no longer referenced.</p>
+<p><strong>Uninstalling the app removes all of its stored data</strong>, because Forge storage is scoped to the installation. No work items are affected — the app never creates or edits one.</p>
+<h2>Data residency</h2>
+<p>Forge storage follows your Atlassian cloud instance's data residency. The vendor cannot choose or change where it is held.</p>
+<h2>Contact</h2>
+<p>Questions about this policy, or a request to remove data: <strong>support@maxpetrov.pp.ua</strong></p>
+<p><em>Last updated: 11 September 2026.</em></p>
+</body>
+</html>

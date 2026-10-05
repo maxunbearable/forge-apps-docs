@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Issue Tree Templates for Jira - Privacy Policy</title>
+<style>:root { color-scheme: light dark; --bg:#fff; --fg:#1a1a1a; --muted:#555; --border:#ddd; --code-bg:#f2f2f2; --link:#0052cc; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#1a1a1a; --fg:#e8e8e8; --muted:#aaa; --border:#3a3a3a; --code-bg:#2a2a2a; --link:#6cb2ff; } }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--fg); font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+  h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+  .kicker { color: var(--muted); margin-top: 0; margin-bottom: 2rem; font-size: 0.95rem; }
+  h2 { font-size: 1.3rem; margin-top: 2.2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+  h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+  p, li { color: var(--fg); }
+  a { color: var(--link); }
+  code { background: var(--code-bg); padding: 0.1em 0.35em; border-radius: 4px; font-size: 0.9em; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+  th, td { border: 1px solid var(--border); padding: 0.5rem 0.7rem; text-align: left; }
+  th { background: var(--code-bg); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  footer { margin-top: 3rem; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 1rem; }</style>
+</head>
+<body>
+<h1>Issue Tree Templates for Jira</h1>
+<p class="kicker">Privacy Policy</p>
+<p>Draft, ready to host. The Marketplace distribution form requires a <strong>Privacy policy URL</strong> before an app can be shared or listed; this is that page's content.</p>
+<p>Host at <code>https://&lt;domain&gt;/issue-tree-templates/privacy</code> and put the URL in the developer console under <strong>Distribution → Edit → Privacy policy</strong>.</p>
+<hr />
+<h2>What this app is</h2>
+<p>Issue Tree Templates for Jira lets you save a Jira work item and everything beneath it as a reusable template, then recreate that structure in any project on your site.</p>
+<h2>Where your data lives</h2>
+<p>The app runs entirely on Atlassian's own infrastructure using Atlassian Forge, and it is eligible for the <strong>Runs on Atlassian</strong> programme. It calls <strong>no external service</strong>, and it declares <strong>no remote hostnames</strong>. Nothing this app reads or writes leaves Atlassian's infrastructure, and the vendor has no server that your data passes through.</p>
+<p>Templates are stored in <strong>Forge storage</strong>, which is hosted by Atlassian inside your Atlassian cloud environment and is scoped to your installation of this app.</p>
+<h2>What the app stores</h2>
+<p>When you save a work item as a template, the app stores a copy of that item and its descendants:</p>
+<ul><li><p>issue type names, hierarchy levels and the parent/child structure</p></li><li><p>summaries and descriptions</p></li><li><p>the values of fields the target project would accept on create</p></li><li><p>the links between the captured items</p></li></ul>
+<p><strong>The app stores no personal data.</strong> When a captured work item has a value in a user field — most commonly <strong>Assignee</strong>, but also any custom user-picker field — the app does <strong>not</strong> store that person. It replaces the value with a named variable, such as <code>{{assignee}}</code>, and asks who it should be each time the template runs. The account ID you pick is used for that one run and is never written to storage.</p>
+<p>That is also better behaviour: a template that hard-codes whoever happened to be assigned on the day is wrong the next time you use it.</p>
+<p>The app also stores, per template: how many times it has been run, how many work items it created, and when it was last run.</p>
+<h2>What the app does not store</h2>
+<ul><li><p>No account IDs, email addresses, display names or avatars</p></li><li><p>No attachments</p></li><li><p>No comments or work logs</p></li><li><p>No credentials or tokens</p></li><li><p>No analytics, telemetry or tracking of any kind</p></li></ul>
+<h2>What the app reads</h2>
+<p>To report what will happen before creating anything ("preflight"), the app reads the target project's issue types and field metadata. To save a template it reads the chosen work item and its children. <strong>Saving a template only ever reads; it never changes anything in Jira.</strong></p>
+<p>All reads and writes run <strong>as the signed-in user</strong>, so the app can only ever see or create what that person could see or create themselves.</p>
+<h2>Permissions the app requests</h2>
+<table><tbody><tr><th><p>Scope</p></th><th><p>What it is for</p></th></tr><tr><td><p><code>read:jira-work</code></p></td><td><p>Read project field metadata for preflight, and read a work item and its children when saving a template</p></td></tr><tr><td><p><code>write:jira-work</code></p></td><td><p>Create the work items a template describes, and the links between them</p></td></tr><tr><td><p><code>storage:app</code></p></td><td><p>Store templates in Forge storage inside Atlassian</p></td></tr></tbody></table>
+<p>The app deliberately does <strong>not</strong> request <code>manage:jira-configuration</code>, does <strong>not</strong> request <code>delete:jira-work</code>, and does <strong>not</strong> use offline user impersonation.</p>
+<h2>Retention and deletion</h2>
+<p>Templates persist until someone deletes them in the app. Deleting a template removes its content and its usage statistics.</p>
+<p><strong>Uninstalling the app removes all of its stored data</strong>, because Forge storage is scoped to the installation. Work items the app created are ordinary Jira work items and are not affected — they remain yours.</p>
+<h2>Data residency</h2>
+<p>Forge storage follows your Atlassian cloud instance's data residency. The vendor cannot choose or change where it is held.</p>
+<h2>Contact</h2>
+<p>Questions about this policy, or a request to remove data: <strong>support@maxpetrov.pp.ua</strong></p>
+<p><em>Last updated: 6 September 2026.</em></p>
+</body>
+</html>

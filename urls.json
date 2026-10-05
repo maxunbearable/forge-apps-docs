@@ -1,0 +1,34 @@
+{
+  "issue-tree-templates": {
+    "documentation": "issue-tree-templates/documentation.html",
+    "privacy": "issue-tree-templates/privacy.html"
+  },
+  "business-days-jql": {
+    "documentation": "business-days-jql/documentation.html",
+    "privacy": "business-days-jql/privacy.html"
+  },
+  "portal-attachments": {
+    "documentation": "portal-attachments/documentation.html",
+    "privacy": "portal-attachments/privacy.html"
+  },
+  "personal-space-sweep": {
+    "documentation": "personal-space-sweep/documentation.html",
+    "privacy": "personal-space-sweep/privacy.html",
+    "security": "personal-space-sweep/security.html"
+  },
+  "content-reuse-inventory": {
+    "documentation": "content-reuse-inventory/documentation.html",
+    "privacy": "content-reuse-inventory/privacy.html",
+    "security": "content-reuse-inventory/security.html"
+  },
+  "large-page-compare": {
+    "documentation": "large-page-compare/documentation.html",
+    "privacy": "large-page-compare/privacy.html",
+    "security": "large-page-compare/security.html"
+  },
+  "assets-automation-actions": {
+    "documentation": "assets-automation-actions/documentation.html",
+    "privacy": "assets-automation-actions/privacy.html",
+    "security": "assets-automation-actions/security.html"
+  }
+}
