@@ -27,7 +27,7 @@
 <p class="kicker">Documentation</p>
 <h2>What this app does</h2>
 <p>Confluence lets a page reuse content from another page: native Excerpt and Excerpt Include, MultiExcerpt, and synced blocks. Nothing native lists them across the site, so nobody can see which pages change with a source, and a deleted source breaks its includes quietly.</p>
-<p>Content Reuse Inventory adds one page under Apps. A scan reads every page body on the site and builds an inventory: every Excerpt, MultiExcerpt and synced block with the pages that include it, the orphans nobody includes, the dangling includes whose source is gone, and counts per space. It is read-only and changes nothing.</p>
+<p>Content Reuse Inventory adds one page under Apps. A scan reads every page body on the site and builds an inventory: every Excerpt, MultiExcerpt and synced block with the pages that include it, the orphans nobody includes, the dangling includes whose source is gone, and counts per space. The same scan also counts every macro and app extension in page bodies, for a macro usage report. It is read-only and changes nothing.</p>
 <h2>Getting help</h2>
 <p>Email support@maxpetrov.pp.ua. One person reads that mailbox — the one who wrote the app — and every request gets a first reply within two business days, Monday to Friday. That is the window a part-time maintainer can hold every week rather than on a good one; most replies land sooner.</p>
 <p>Say what the status strip showed — the scan date, the counts and the restricted count — and, for a row that looks wrong, the page it names and the name of the block. If a scan stalled or failed, the line under the button carries the batch it stopped at and the reason Confluence gave, and that line is the fastest thing to send.</p>
@@ -40,9 +40,10 @@
 <p>The inventory is as fresh as the last scan, never live. The status strip carries the scan date.</p>
 <h2>Reading the inventory</h2>
 <p>The Sources table lists each Excerpt, MultiExcerpt and synced block with its page, its space and its name, and the pages that include it. A source nobody includes is an orphan; an include whose source page or block no longer exists is dangling. Both are counted in the status strip and listed by page, grouped by space.</p>
+<p>The Macros tab is the macro usage report from the same scan: every macro and app extension type found in page bodies, labelled Confluence macro, Forge app or other extension, with the number of pages using it, how many times it occurs, and page counts per space. Show lists the pages that use it, 500 at a time, with the same rule as the Sources table: a page you cannot open reads "restricted page", with no title, space or link.</p>
 <p>Page titles are read as you, not as the app, through your own Confluence permissions. A page you cannot open shows as "restricted page" with no title, and the status strip counts how many rows that applies to. A page restricted from the app itself is not scanned at all; it is counted as unreadable in the scan status.</p>
 <h2>What it does with your data</h2>
-<p>The app runs entirely on Atlassian infrastructure. It declares no remote hostname and opens no network connection of its own, so nothing it reads leaves Atlassian. The inventory is kept in Forge storage inside your site: page ids, block names and keys, counts and scan dates — no page bodies, no page titles and no account ids.</p>
+<p>The app runs entirely on Atlassian infrastructure. It declares no remote hostname and opens no network connection of its own, so nothing it reads leaves Atlassian. The inventory is kept in Forge storage inside your site: page ids, block names and keys, macro keys, counts and scan dates — no page bodies, no page titles and no account ids.</p>
 <p>The full privacy policy and the security policy are separate pages; their URLs are on this app's Marketplace listing.</p>
 <h2>Known limitations</h2>
 <p>These are the limits the app was built against, written down here rather than discovered after purchase.</p>
